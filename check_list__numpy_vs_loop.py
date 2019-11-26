@@ -1,5 +1,6 @@
 """
 loop 实力吊打 numpy (○´･д･)ﾉ
+转换成纯属组之后 勉强挽尊
 """
 
 import time
@@ -15,6 +16,37 @@ for i in range(1000000):
     bool_list = []
     for num, i in enumerate(a):
         if i == '':
+            bool_list.append(True)
+        elif i == b[num]:
+            bool_list.append(True)
+        else:
+            bool_list.append(False)
+    result = False not in bool_list
+print("round2: ", time.time()-s_time, result)
+
+
+s_time = time.time()
+aaa = np.array(a)
+bbb = np.array(b)
+nnn = np.array(n)
+for i in range(1000000):
+    aa = aaa == bbb
+    bb = aaa == nnn
+    result = not (aa == bb).any()
+print("round1: ", time.time()-s_time, result)
+
+
+
+
+a = [1, 2000, 0]*10
+b = [1, 2000, 0]*10
+n = [0, 0, 0]*10
+
+s_time = time.time()
+for i in range(1000000):
+    bool_list = []
+    for num, i in enumerate(a):
+        if i == 0:
             bool_list.append(True)
         elif i == b[num]:
             bool_list.append(True)
