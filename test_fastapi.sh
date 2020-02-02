@@ -1,1 +1,1 @@
-uvicorn.exe test_fastapi:app --reload --workers 2
+uvicorn test_fastapi:app --reload --workers 2
