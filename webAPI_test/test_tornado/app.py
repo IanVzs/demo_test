@@ -31,16 +31,12 @@ define("port", default=PORT, help="run on the given port", type=int)
 
 
 class MainHandler(tornado.web.RequestHandler):
-    """
     async def get(self):
         self.write('"dump": "Hello, world"')
-    """
 
+    """
     async def get(self):
-        """
-        处理同时有多个网络请求的异步
-        :return:
-        """
+        # 处理同时有多个网络请求的异步
         task_list = []
         for i in range(1):
             task_list.append(self.asynchronous_fetch('http://127.0.0.1:8001/nginx'))
@@ -53,6 +49,7 @@ class MainHandler(tornado.web.RequestHandler):
         response = await http_client.fetch(url)
         print("asynchronous_fetch %s" % response.body)
         return response.body
+    """
 
 
 def main():
