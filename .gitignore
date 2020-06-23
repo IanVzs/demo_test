@@ -1,5 +1,39 @@
+# Build and Release Folders
+bin-debug/
+bin-release/
+[Oo]bj/
+[Bb]in/
+__pycache__/
+data/
+
+# Other files and folders
+.settings/
+
+# Executables
+*.swf
+*.air
+*.ipa
+*.apk
+*.pyc
+*.out
+
+# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
+# should NOT be excluded as they contain compiler settings and other important
+# information for Eclipse / Flash Builder.
+
+*tar.gz
+*.tar
+
+
 # Prerequisites
 *.d
+# Build and Release Folders
+bin-debug/
+bin-release/
+[Oo]bj/
+[Bb]in/
+__pycache__/
+data/
 
 # Object files
 *.o
@@ -27,9 +61,16 @@
 *.so
 *.so.*
 *.dylib
+# Other files and folders
+.settings/
 
 # Executables
 *.exe
+*.swf
+*.air
+*.ipa
+*.apk
+*.pyc
 *.out
 *.app
 *.i*86
@@ -41,6 +82,9 @@
 *.su
 *.idb
 *.pdb
+# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
+# should NOT be excluded as they contain compiler settings and other important
+# information for Eclipse / Flash Builder.
 
 # Kernel Module Compile Results
 *.mod*
@@ -50,3 +94,6 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# data files
+*.csv

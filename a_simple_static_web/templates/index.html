@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+        <head>
+                <meta charset="utf-8">
+        </head>
+         
+        <body>
+        <h1>报告生成, 返回点击模板消息查看</h1>
+        <script language="javascript">
+        function clock(){i=i-1
+        document.title="本窗口将在"+i+"秒后自动关闭!";
+        if(i>0)setTimeout("clock();",1000);
+        else 
+ if (navigator.userAgent.indexOf("MSIE") > 0) {//close IE  
+   if (navigator.userAgent.indexOf("MSIE 6.0") > 0) {  
+      window.opener = null;  
+         window.close();  
+           } else {  
+              window.open('', '_top');  
+                 window.top.close();  
+                   }  
+                    }  
+                     else if (navigator.userAgent.indexOf("Firefox") > 0) {//close firefox  
+                       window.location.href = 'about:blank ';  
+                        } else {//close chrome;It is effective when it is only one.  
+                          window.opener = null;  
+                            window.open('', '_self');  
+                              window.close();  
+                               }  
+        var i=1
+        clock();
+        </script></body>
+         
+</html>

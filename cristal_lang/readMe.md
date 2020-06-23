@@ -1,0 +1,1 @@
+crystal init app myapp

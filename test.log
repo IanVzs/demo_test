@@ -1,0 +1,27 @@
+New var:....... lst = [386, 628, 150, 773, 674, 210, 88, 996, 699, 363]
+New var:....... i = 9
+18:50:32.276191 line        10         lower = min(lst)
+New var:....... lower = 88
+18:50:32.276425 line        11         upper = max(lst)
+New var:....... upper = 996
+18:50:32.276531 line        12         mid = (lower + upper) / 2
+New var:....... mid = 542.0
+18:50:32.276637 line        13         print(lower, mid, upper)
+New var:....... lst = [347, 268, 202, 585, 304, 428, 120, 952, 49, 981]
+New var:....... i = 9
+18:51:13.707396 line        10         lower = min(lst)
+New var:....... lower = 49
+18:51:13.707603 line        11         upper = max(lst)
+New var:....... upper = 981
+18:51:13.707827 line        12         mid = (lower + upper) / 2
+New var:....... mid = 515.0
+18:51:13.707954 line        13         print(lower, mid, upper)
+New var:....... lst = [476, 288, 781, 989, 524, 333, 444, 609, 654, 851]
+New var:....... i = 9
+19:01:33.530753 line        10         lower = min(lst)
+New var:....... lower = 288
+19:01:33.530867 line        11         upper = max(lst)
+New var:....... upper = 989
+19:01:33.530969 line        12         mid = (lower + upper) / 2
+New var:....... mid = 638.5
+19:01:33.531148 line        13         print(lower, mid, upper)
