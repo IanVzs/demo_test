@@ -5,7 +5,7 @@ requests:
 
 测试`apscheduler`功能
 """
-
+import time
 try:
     from pytz import utc, timezone
     china_tz = timezone('Asia/Shanghai')
@@ -20,26 +20,33 @@ except:
     print("需安装下述包")
     print("pip3 install sqlalchemy", "pip3 install apscheduler")
 
-jobstores = {
-    # 'mongo': MongoDBJobStore(),
-    "memory": MemoryJobStore(),
-    # 'default': SQLAlchemyJobStore(url='sqlite:///jobs.sqlite')
-}
-executors = {
-    'default': ThreadPoolExecutor(10),
-    'processpool': ProcessPoolExecutor(3)
-}
-job_defaults = {
-    'coalesce': False,
-    'max_instances': 3
-}
-scheduler = BackgroundScheduler(jobstores=jobstores, executors=executors, job_defaults=job_defaults, timezone=china_tz)
+import logging
 
+logging.basicConfig()
+logging.getLogger('apscheduler').setLevel(logging.DEBUG)
+logger = logging
+
+def init_scheduler():
+    jobstores = {
+        # 'mongo': MongoDBJobStore(),
+        "memory": MemoryJobStore(),
+        # 'default': SQLAlchemyJobStore(url='sqlite:///jobs.sqlite')
+    }
+    executors = {
+        'default': ThreadPoolExecutor(10),
+        'processpool': ProcessPoolExecutor(3)
+    }
+    job_defaults = {
+        'coalesce': False,
+        'max_instances': 3
+    }
+    scheduler = BackgroundScheduler(jobstores=jobstores, executors=executors, job_defaults=job_defaults, timezone=china_tz)
+    return scheduler
 
 
 
 def myfunc():
-    print("myfunc O(∩_∩)O")
+    logger.info("myfunc O(∩_∩)O")
     import random
     if random.random() > 0.6:
         raise "hey raise"
@@ -51,17 +58,23 @@ def my_listener(event):
             "jobid": event.job_id,
             "jobstore": event.jobstore
         }
-        print(f'The job {event.job_id} crashed :( | {log_job}')
+        logger.info(f'The job {event.job_id} crashed :( | {log_job}')
     else:
-        print(f'The job {event.job_id} worked :)')
+        logger.info(f'The job {event.job_id} worked :)')
 
-scheduler.add_listener(my_listener, EVENT_JOB_EXECUTED | EVENT_JOB_ERROR)
+def job_scheduler(scheduler):
+    scheduler.add_listener(my_listener, EVENT_JOB_EXECUTED | EVENT_JOB_ERROR)
+    scheduler.add_job(myfunc, 'interval', seconds=5, id='test_job_id') # minutes=1
+    scheduler.start()
+    logger.info(f"scheduler.get_jobs: {scheduler.get_jobs()}")
+    return 1
 
-scheduler.start()
-scheduler.add_job(myfunc, 'interval', seconds=1, id='test_job_id') # minutes=1
-print(f"scheduler.get_jobs: {scheduler.get_jobs()}")
+# time.sleep(6)
+# scheduler.remove_job('test_job_id')
+# scheduler.shutdown(wait=True)
 
-import time
-time.sleep(6)
-scheduler.remove_job('test_job_id')
-scheduler.shutdown(wait=True)
+if "__main__" == __name__:
+    scheduler = init_scheduler()
+    jobs = job_scheduler(scheduler)
+    while jobs:
+        time.sleep(3)
