@@ -1,0 +1,6 @@
+puts "crystal run hello_world.cr"
+puts "crystal build hello_world.cr"
+puts "crystal build hello_world.cr --release"
+puts "crystal build hello_world.cr --release --static"
+puts "crystal init app <name>"
+puts "more in :  crystal help"

@@ -2,12 +2,12 @@ name: myapp
 version: 0.1.0
 
 authors:
-  - Ian <vzsxianggu@gmail.com>
+  - your-name-here <your-email-here>
 
 targets:
   myapp:
     main: src/myapp.cr
 
-crystal: 0.33.0
+crystal: 0.35.1
 
 license: MIT
