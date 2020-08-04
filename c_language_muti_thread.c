@@ -1,3 +1,8 @@
+/****
+Ian: 
+    gcc编译失败 "undefined reference to `pthread_create'" 不要慌, 
+    增加个 `-pthread` 链接🔗就好了
+****/
 #include <stdio.h> 
 #include <stdlib.h> 
 #include <unistd.h> 
