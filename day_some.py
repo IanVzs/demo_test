@@ -4,6 +4,7 @@ import datetime
 today = datetime.datetime.today()
 today_str = today.strftime("%Y-%m-%d")
 today = datetime.datetime.strptime(today_str, "%Y-%m-%d")
+print(f"year: {today.year}, month: {today.month}, day: {today.day}")
 utoday = time.mktime(today.timetuple())
 utoday_str = time.strftime('%Y-%m-%d',time.localtime(utoday))
 
