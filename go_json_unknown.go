@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"reflect"
 )
 
 func main() {
@@ -16,6 +17,7 @@ func main() {
 	gobook, ok := r.(map[string]interface{})
 	if ok {
 		for k, v := range gobook {
+			fmt.Println(k, "type:", reflect.TypeOf(v), "------------")
 			switch v2 := v.(type) {
 			case string:
 				fmt.Println(k, "is string", v2)
@@ -30,6 +32,12 @@ func main() {
 				}
 			default:
 				fmt.Println(k, "is another type not handle yet")
+			case map[string]interface{}:
+				for k_, v_ := range v2 {
+					fmt.Println(k_, "sub------------type:", reflect.TypeOf(v_), "!!!!!_is_!!!!", v2, v_)
+				}
+			default:
+				fmt.Println(k, "is another type not handle yet", v2)
 			}
 		}
 	}
