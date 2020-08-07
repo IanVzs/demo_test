@@ -16,3 +16,7 @@ print(ttoday, ttoday_str)
 
 utoday_str = time.strftime('%Y-%m-%d',time.localtime(1590042205))
 
+
+
+to_s = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+print(f"nyrsfm: {to_s}")

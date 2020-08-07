@@ -13,4 +13,11 @@ puts "range: #{1..9} to_a: #{(1..9).to_a}, #{1...10}: to_a: #{(1...10).to_a}"
 
 puts ""
 aaa = {"one" => 1, "two" => 2}
-puts "key-value Hash Type: aaa: #{aaa}, aaa[one]: #{aaa["one"]}"
+puts "key-value Hash Type: aaa: #{aaa}, aaa[\"one\"]: #{aaa["one"]}"
+
+
+
+puts ""
+puts "2==1 -> #{2 == 1}"
+puts "2&&1 -> #{2 && 1}"
+puts "2||1 -> #{2 || 1}"
