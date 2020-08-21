@@ -7,6 +7,7 @@ add_argument 中, 有"-"表示参数可选, 没有表示必须传入
 import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("square", type=int, help="display a square of a given number")
+parser.add_argument("square2", type=str, help="display a square of a given number")
 parser.add_argument("-v", "--verbosity", type=int, choices=[0, 1, 2], help="increase output verbosity")
 
 args = parser.parse_args()
