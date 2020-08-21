@@ -7,3 +7,10 @@ class A(BaseModel):
 def go():
     a = 'b'
     print(a)
+
+def get_appid():
+    return "b"
+
+def test_rewrite():
+    sign = True
+    print("test_rewrite", sign)
