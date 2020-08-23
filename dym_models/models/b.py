@@ -12,5 +12,5 @@ def get_appid():
     return "b"
 
 def test_rewrite():
-    sign = True
+    sign = False
     print("test_rewrite", sign)
