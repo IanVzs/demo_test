@@ -1,5 +1,7 @@
 
+import os
 from models.base import BaseModel
+
 class A(BaseModel):
     def go(self):
         self.a = 'c'
@@ -7,6 +9,8 @@ class A(BaseModel):
 
 def go():
     c = 'c'
+    c = os.listdir()
+    #eval("print('from eval'*123)")
     print(c)
 
 def get_appid():
