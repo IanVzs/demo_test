@@ -24,4 +24,4 @@ TODO: Write development instructions here
 
 ## Contributors
 
-- [Ian](https://github.com/your-github-user) - creator and maintainer
+- [your-name-here](https://github.com/your-github-user) - creator and maintainer

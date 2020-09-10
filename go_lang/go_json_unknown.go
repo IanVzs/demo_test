@@ -30,6 +30,8 @@ func main() {
 				for i, iv := range v2 {
 					fmt.Println(i, iv)
 				}
+			default:
+				fmt.Println(k, "is another type not handle yet")
 			case map[string]interface{}:
 				for k_, v_ := range v2 {
 					fmt.Println(k_, "sub------------type:", reflect.TypeOf(v_), "!!!!!_is_!!!!", v2, v_)

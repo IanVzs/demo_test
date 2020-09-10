@@ -4,6 +4,7 @@ import datetime
 today = datetime.datetime.today()
 today_str = today.strftime("%Y-%m-%d")
 today = datetime.datetime.strptime(today_str, "%Y-%m-%d")
+print(f"year: {today.year}, month: {today.month}, day: {today.day}")
 utoday = time.mktime(today.timetuple())
 utoday_str = time.strftime('%Y-%m-%d',time.localtime(utoday))
 
@@ -15,3 +16,7 @@ print(ttoday, ttoday_str)
 
 utoday_str = time.strftime('%Y-%m-%d',time.localtime(1590042205))
 
+
+
+to_s = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+print(f"nyrsfm: {to_s}")

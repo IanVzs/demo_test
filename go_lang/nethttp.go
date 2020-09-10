@@ -16,6 +16,7 @@ func main() {
 	pull_data := PostData{Appid: "5c99b1a09ea2ea68c824dad8"}
 	pull_buff := new(bytes.Buffer)
 	json.NewEncoder(pull_buff).Encode(pull_data)
+	var url string = "http://129.28.192.11:8979/testapi"
 	// var url string = "http://129.28.192.11:8979/testapi"
 	var url string = "http://httpbin.org/post"
 	//res, err := http.Post("https://zsys.zuoshouyisheng.com/service_setting/pull", "application/json; charset=utf-8", pull_buff)
