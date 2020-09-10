@@ -11,6 +11,10 @@ float add_float(float, float);
 int type_test(int t_int, char t_char, char *t_charstar, int t_intarr);
 Mi getMi();
 char *get_string();
+// 配合unsigned char 和 char 互相转化, 可以完成更多的字符回传
+// 这方法仅"能用"级别
+int ulist2str(char *str, byte *ulist, int len);
+int str2ulist(char *str, byte *ulist);
 
 int type_test(int t_int, char t_char, char *t_charstar, int t_intarr)
 {
@@ -71,4 +75,36 @@ Mi getMi()
 char *get_string(char *hi){
     printf("---*****---hi: %s---*****---\n", hi);
     return hi;
+}
+
+/*********转换长度差为2倍************/
+int str2ulist(char *str, byte *ulist)
+{
+    /*******unsigned char列表转换为字符串*********/
+    int i = strlen(str), j = 0, conter = 0;
+    char c[2];
+    unsigned int bytes[2];
+    for (j = 0; j < i; j += 2)
+    {
+        if(0 == j%2)
+        {
+            c[0] = str[j];
+            c[1] = str[j + 1];
+            sscanf(c, "%02x", &bytes[0]);
+            ulist[conter] = bytes[0];
+            conter++;
+        }
+    }
+    return 0;
+}
+
+int ulist2str(char *str, byte *ulist, int len)
+{
+    /*******字符串转换为unsigned char列表*********/
+    int i;
+    for (i = 0; i < len; i++)
+    {
+        sprintf(str + i*2, "%02x", ulist[i]);
+    }
+    return 0;
 }
