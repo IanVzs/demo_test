@@ -9,6 +9,7 @@ class A:
 
     @classmethod
     def cm(self):
+        print(f"in cm classmethod self.a: {self.a}")
         print(f"in www: {self.ini}")
 
     @classmethod

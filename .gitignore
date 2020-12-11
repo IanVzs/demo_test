@@ -23,6 +23,8 @@ data/
 
 *tar.gz
 *.tar
+*.zip
+HWDB1*
 
 
 # Prerequisites
