@@ -11,7 +11,7 @@ import json
 import time
 import redis
 import requests
-from multiprocessing import Process
+from multiprocessing import Pool
 
 class Log:
     def info(self, data):
@@ -126,7 +126,7 @@ class Delayer():
             time.sleep(1)
 
 def run(name=''):
-    delayer = Delayer(name='test')
+    delayer = Delayer(name=name)
     delayer.run()
 
 if __name__ == "__main__":
@@ -135,7 +135,6 @@ if __name__ == "__main__":
         "test",
         "test2"
     ]
-    for i in list_names:
-        p = Process(target=run, args=(i, ))
-        p.start()
-        p.join()
+    with Pool(5) as p:
+        p.map(run, list_names)
+
