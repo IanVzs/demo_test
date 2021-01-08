@@ -92,9 +92,11 @@ class Delayer():
                 pass
 
     def run(self):
-        int_now = int(time.time())
-        if self.zcount(int_now):
-            self.do_thing(int_now)
+        while 1:
+            int_now = int(time.time())
+            if self.zcount(int_now):
+                self.do_thing(int_now)
+            time.sleep(1)
 
 
 if __name__ == "__main__":
