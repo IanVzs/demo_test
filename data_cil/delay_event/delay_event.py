@@ -3,6 +3,9 @@
 
 Python版
 如果想不到更好的解决方式估计以后还会更新其他语言版？
+
+使用:
+    # data 传入{"action": "request", "request": {"url", "method", "params", "data", "json"}}
 """
 import json
 import time
@@ -30,7 +33,11 @@ rds = redis.Redis(
 
 def request(data):
     rsp = None
+    if not data:
+        log.error("request|error|get_None")
+        return rsp
     try:
+        data["timeout"] = 10
         rsp = requests.request(**data).json()
     except Exception as err:
         log.error(f"request|error|{err}")
