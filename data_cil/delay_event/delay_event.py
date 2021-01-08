@@ -7,6 +7,7 @@ Python版
 import json
 import time
 import redis
+import requests
 
 class Log:
     def info(self, data):
@@ -28,8 +29,11 @@ rds = redis.Redis(
 )
 
 def request(data):
-    import requests
-    rsp = requests.request(**data).json()
+    rsp = None
+    try:
+        rsp = requests.request(**data).json()
+    except Exception as err:
+        log.error(f"request|error|{err}")
     return rsp
 
 class Delayer():
@@ -39,7 +43,7 @@ class Delayer():
     def push(self, no:str, expired: int, data: dict):
         sign = sign2 = 0
         try:
-            sign = rds.zadd(self.name, int(expired), no)
+            sign = rds.zadd(self.name, {no: int(expired)})
             sign2 = rds.set(no, json.dumps(data, ensure_ascii=False))
         except Exception as err:
             rds.zrem(self.name, no)
@@ -53,13 +57,21 @@ class Delayer():
         return bool(sign and sign2)
     
     def remove(self, no) -> bool:
-        sign = rds.zrem(self.name, no)
+        log.info(f"Delayer|remove|{self.name}|{no}")
+        sign1 = rds.zrem(self.name, no)
         sign2 = rds.delete(no)
-        return bool(sign and sign2)
+        sign = bool(sign and sign2)
+        if not sign:
+            info = {
+                "sign_zrem": sign1,
+                "sign_delete": sign2
+            }
+            log.error(f"Delayer|remove|failed|{self.name}|{no}|{info}")
+        return sign
     
     def get(self, no):
         bdata = rds.get(no)
-        bdata = bdata and bdata.encode()
+        bdata = bdata and bdata.decode()
         bdata = bdata and json.loads(bdata)
         return bdata
     
@@ -71,22 +83,29 @@ class Delayer():
 
     def zrange2data(self, max, now=0):
         list_result = rds.zrange(self.name, 0, max, withscores=True)
-        # TODO
-        data = {}
-        for r in list_result:
-            no = r["scores"]
-            if no > now:
+        dict_datas = {}
+        for bmembr, score in list_result:
+            no = bmembr.decode()
+            if score > now:
                 continue
             data = self.get(no)
-            data[no] = data
-        return data
+            dict_datas[no] = data
+        return dict_datas
 
     def do_thing(self, now):
         need = self.zcount(now, 10, 0)
         range_data = self.zrange2data(need, now)
+        rsp = None
         for no, data in range_data.items():
-            rsp = request(**data)
-            if rsp["status"] == 0:
+            action = data and data.get("action")
+            if action == "request":
+                rsp = request(**(data.get(action) or {}))
+            elif action == "xxx":
+                # do other
+                pass
+            else:
+                log.error(f"Delayer|do_thing|nothing|{data}")
+            if rsp and rsp["status"] == 0:
                 self.remove(no)
             else:
                 pass
