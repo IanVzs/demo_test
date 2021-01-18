@@ -90,14 +90,17 @@ def count_ago(str_date: str = '', dt_date: datetime = None) -> str:
         if interval.days > 0:
             msg = msg = count_age(dt_date=dt_date)
             msg = msg.replace('岁', '年')
-        elif interval.days == 0:
+        elif interval.days == 0 and interval.seconds>10:
             _s = interval.seconds
             _m = _s and int(_s/60)
             _h = _m and int(_m/60)
-            msg = (_s and f"{_s}秒") and (_m and f"{_m}分钟" or f"{_s}秒") and (_h and f"{_h}小时" or f"{_m}分钟")
+            _str_s = (_s and f"{_s}秒")
+            _str_m = (_m and f"{_m}分钟" or _str_s)
+            _str_h = (_h and f"{_h}小时" or _str_m)
+            msg = _str_s and _str_m and _str_h
         else:
             msg = '刚刚'
-        msg = f"{msg}之前"
+        msg = f"{msg}之前" if "刚刚" not in msg else msg
     return msg
 
 if "__main__" == __name__:
@@ -120,3 +123,9 @@ if "__main__" == __name__:
     tm = datetime.now() - timedelta(seconds=500)
     print(f"count_age|{datetime2str(tm)}", count_age(dt_date=tm))
     print(f"count_ago|{datetime2str(tm)}", count_ago(dt_date=tm))
+
+    tm = datetime.now() - timedelta(seconds=11)
+    print(f"count_age|{datetime2str(tm)}", count_ago(dt_date=tm))
+
+    tm = datetime.now() - timedelta(seconds=0)
+    print(f"count_age|{datetime2str(tm)}", count_ago(dt_date=tm))
