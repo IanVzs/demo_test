@@ -129,3 +129,7 @@ if "__main__" == __name__:
 
     tm = datetime.now() - timedelta(seconds=0)
     print(f"count_age|{datetime2str(tm)}", count_ago(dt_date=tm))
+
+
+    tm = datetime(2021,1,8,17,20,4)
+    print(f"count_age|{datetime2str(tm)}", count_ago(dt_date=tm))
