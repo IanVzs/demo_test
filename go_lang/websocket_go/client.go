@@ -8,6 +8,8 @@ import (
 	"bytes"
 	"log"
 	"net/http"
+	"strconv"
+	"strings"
 	"time"
 
 	"github.com/gorilla/websocket"
@@ -46,6 +48,7 @@ type Client struct {
 
 	// Buffered channel of outbound messages.
 	send chan []byte
+	name string
 }
 
 // readPump pumps messages from the websocket connection to the hub.
@@ -63,6 +66,12 @@ func (c *Client) readPump() {
 	c.conn.SetPongHandler(func(string) error { c.conn.SetReadDeadline(time.Now().Add(pongWait)); return nil })
 	for {
 		_, message, err := c.conn.ReadMessage()
+		// region 显示发送内容和ip来源
+		// msgSource := c.conn.RemoteAddr().String()
+		msgSource := c.name
+		msgSign := ": "
+		log.Printf(msgSource + msgSign + string(message))
+		//endregion
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
 				log.Printf("error: %v", err)
@@ -122,13 +131,27 @@ func (c *Client) writePump() {
 
 // serveWs handles websocket requests from the peer.
 func serveWs(hub *Hub, w http.ResponseWriter, r *http.Request) {
+	var sBuild strings.Builder
+	if !websocket.IsWebSocketUpgrade(r) {
+		log.Println("/ws not websocket request")
+	}
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Println(err)
 		return
 	}
-	client := &Client{hub: hub, conn: conn, send: make(chan []byte, 256)}
+	strName := "head_" + conn.RemoteAddr().String() + "_tail"
+	client := &Client{hub: hub, conn: conn, send: make(chan []byte, 256), name: strName}
 	client.hub.register <- client
+
+	// region 欢迎语+当前在线展示
+	numClient := len(client.hub.clients)
+	numClient++
+	strNum := strconv.Itoa(numClient)
+	sBuild.Write([]byte("hello hi, now had: "))
+	sBuild.Write([]byte(strNum))
+	conn.WriteMessage(websocket.TextMessage, []byte(sBuild.String()))
+	//endregion
 
 	// Allow collection of memory referenced by the caller by doing all work in
 	// new goroutines.
