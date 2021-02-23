@@ -99,3 +99,6 @@ dkms.conf
 
 # data files
 *.csv
+
+# go build
+main
