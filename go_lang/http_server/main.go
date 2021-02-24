@@ -28,7 +28,7 @@ func hello(w http.ResponseWriter, r *http.Request) {
 func main() {
 	flag.Parse()
 	http.HandleFunc("/", hello)
-	http.HandleFunc("/headers", soi.SoiAlert)
+	http.HandleFunc("/soi/polling", soi.SoiAlert)
 	log.Printf("server run: " + *addr)
 	err := http.ListenAndServe(*addr, nil)
 	if err != nil {
