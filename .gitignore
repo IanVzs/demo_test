@@ -102,3 +102,6 @@ dkms.conf
 
 # go build
 main
+
+# run args
+path_args

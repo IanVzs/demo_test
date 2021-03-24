@@ -133,3 +133,6 @@ if "__main__" == __name__:
 
     tm = datetime(2021,1,8,17,20,4)
     print(f"count_age|{datetime2str(tm)}", count_ago(dt_date=tm))
+
+    day = "2020-09-12"
+    print(f"count_age|{day}", count_age(day))
