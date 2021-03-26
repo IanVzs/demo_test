@@ -15,6 +15,7 @@ learning_rate = 1e-6
 for t in range(500):
     # 前向传递,计算预测值y
     h = x.dot(w1)
+    import pdb; pdb.set_trace()
     h_relu = np.maximum(h, 0)
     y_pred = h_relu.dot(w2)
 
