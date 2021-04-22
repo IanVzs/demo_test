@@ -34,3 +34,70 @@ if __name__ == '__main__':
             a.append(1)
         return 'connect success.'
     print(connect())
+
+
+
+
+
+elif 0:
+    """
+    信号掐断
+    
+    windows不可用, 需要改signal类型.
+    原来已经添加过了...
+    """
+    import signal
+    
+    def set_timeout_class(timeout, callback):
+        # 设置函数超时退出(防止死循环)
+        def wrap(func):
+            def time_out_handle(signum, frame):
+                raise RuntimeError
+    
+            def to_do(*args, **kwargs):
+                self = args[0]
+                try:
+                    signal.signal(signal.SIGALRM, time_out_handle)
+                    signal.alarm(timeout)
+                    r = func(*args, **kwargs)
+                    signal.alarm(0)
+                    return r
+                except RuntimeError as e:
+                    callback(self)
+    
+            return to_do
+    
+        return wrap
+    
+    def set_timeout(timeout, callback):
+        # 设置函数超时退出(防止死循环)
+        def wrap(func):
+            def time_out_handle(signum, frame):
+                raise RuntimeError
+    
+            def to_do(*args, **kwargs):
+                try:
+                    signal.signal(signal.SIGALRM, time_out_handle)
+                    signal.alarm(timeout)
+                    r = func(*args, **kwargs)
+                    signal.alarm(0)
+                    return r
+                except RuntimeError as e:
+                    callback()
+    
+            return to_do
+    
+        return wrap
+    
+    def after_timeout():
+        # can do anthing.（；´д｀）ゞ
+        print("超时了")
+    
+    
+    @set_timeout(1, after_timeout)
+    def print_hello():
+        import time
+        time.sleep(1)
+        print("hello")
+    
+    print_hello()

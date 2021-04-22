@@ -1,6 +1,7 @@
 import pyautogui
 from pyautogui import keyboard
 
+# mouse 控制
 LIST_RECORDER = []
 
 AAA = []

@@ -1,0 +1,9 @@
+"""
+配置说明：无需与本服务链接同一个Redis,但可以.
+"""
+
+REDIS_DATABASE = {'HOST': '192.168.10.7', 'PORT': 6379, 'DB': 0}
+
+LEFT_OFFSET = 100000 #左偏移时间 s
+CHAT_TIMEOUT = "chat_timeout"
+CHAT_MSG="chat_msg"

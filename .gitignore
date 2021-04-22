@@ -23,6 +23,8 @@ data/
 
 *tar.gz
 *.tar
+*.zip
+HWDB1*
 
 
 # Prerequisites
@@ -97,3 +99,12 @@ dkms.conf
 
 # data files
 *.csv
+
+# go build
+main
+
+# run args
+path_args
+
+# .vscode
+.vscode
