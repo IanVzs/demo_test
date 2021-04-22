@@ -11,6 +11,7 @@ import (
 
 var addr = flag.String("addr", "127.0.0.1:8000", "http service address")
 var msg = flag.String("msg", "time", "this client send msg.")
+var id = flag.String("id", "123", "join this chat room.")
 
 func init() {
 	flag.Parse()
@@ -22,7 +23,7 @@ func main() {
 }
 
 func mainWsChat() {
-	u := url.URL{Scheme: "ws", Host: *addr, Path: "/ws_chat", RawQuery: "chat_id=123"}
+	u := url.URL{Scheme: "ws", Host: *addr, Path: "/ws_chat", RawQuery: "chat_id=" + *id}
 	// u := url.URL{Scheme: "ws", Host: *addr, Path: "/ws_chat"}
 	var dialer *websocket.Dialer
 
@@ -73,7 +74,6 @@ func timeWriter(conn *websocket.Conn) {
 	for {
 		time.Sleep(time.Second * 1)
 		// time.Sleep(time.Microsecond * 1)
-		fmt.Println("123")
 		sendMsg := *msg
 		if sendMsg == "time" {
 			conn.WriteMessage(websocket.TextMessage, []byte(time.Now().Format("2006-01-02 15:04:05")))
