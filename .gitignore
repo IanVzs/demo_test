@@ -105,3 +105,6 @@ main
 
 # run args
 path_args
+
+# .vscode
+.vscode
