@@ -8,6 +8,8 @@ import (
 func get_ptr() *int {
 	var ptr *int
 	fmt.Println("ptr 的值为: %x", ptr)
+	// panic: runtime error: invalid memory address or nil pointer dereference
+	// fmt.Println("ptr 的*值为: %d", *ptr)
 	return ptr
 }
 
