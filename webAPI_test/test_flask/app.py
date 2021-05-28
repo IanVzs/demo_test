@@ -35,6 +35,13 @@ def hello():
     requests.get("http://127.0.0.1:8979/")
     return make_response(jsonify({'hello': 'hello_flask'}))
 
+@app.route("/dev-api/corpus/", methods=['GET', 'POST'])
+def hi():
+    import pdb; pdb.set_trace()
+    import requests
+    requests.get("http://127.0.0.1:8979/")
+    return make_response(jsonify({'hello': 'hello_flask'}))
+
 @TESTAPI.route('/testapi', methods=['GET', 'POST'])
 def testapi():
     return make_response(jsonify({'data': 'testapi'}))
