@@ -108,3 +108,6 @@ path_args
 
 # .vscode
 .vscode
+
+# images
+*.png
