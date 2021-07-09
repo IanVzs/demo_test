@@ -111,3 +111,6 @@ path_args
 
 # images
 *.png
+
+# MacOS
+.DS_Store
