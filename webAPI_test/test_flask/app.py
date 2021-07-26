@@ -1,4 +1,4 @@
-#from flask_cors import CORS
+# from flask_cors import CORS
 import requests
 from werkzeug.routing import BaseConverter
 from flask import Flask, jsonify, abort, request, make_response, Blueprint
@@ -9,7 +9,7 @@ app.use_debugger = False
 app.use_reloader = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
 app.url_map.strict_slashes = False
-#CORS(app)
+# CORS(app)
 
 class RegexConverter(BaseConverter):
     def __init__(self, url_map, *items):
