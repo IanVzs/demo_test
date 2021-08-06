@@ -1,6 +1,7 @@
 # import lxml
-from re import L
+import json
 import requests
+from re import L
 from bs4 import BeautifulSoup
 
 def api_get(url):
@@ -51,23 +52,36 @@ def crawl_base_data(city_code):
 def crawl_sport_data(city_code, sport_code):
     resp = api_get(f"http://m.weathercn.com/indexs-detail.do?day=1&partner=sonymobilecalendar&id={city_code}&p_source=&p_type=&indexId={sport_code}")
     soup = BeautifulSoup(resp.content, 'html.parser', from_encoding='utf-8')
-    
-    for i in soup.find_all("script"):
-        
-        print(i.contents)
-        import ipdb; ipdb.set_trace()
-        if i.contents and "var days =" in i.contents:
-            i = i.contents[0].replace("\t", '').replace("\r", '').replace("\n", '').split("var ")
-            
-
     sport_data = {}
-
+    ret = {}
+    for i in soup.find_all("script"):
+        if i.contents and "var days =" in i.contents[0] and "var bigData =" in i.contents[0]:
+            i = i.contents[0].replace("\t", '').replace("\r", '').replace("\n", '').split("var ")
+            for ii in i:
+                if "days =" in ii:
+                    ii = ii.replace("days =", '').replace(";", '').replace("'", '"')
+                    # import ipdb; ipdb.set_trace()
+                    ii = json.loads(ii)
+                    sport_data["days"] = ii
+                elif "bigData =" in ii:
+                    ii = ii.replace("bigData =", '').replace(";", '').replace("'", '"').replace('y', '"y"').replace('val', '"val"')
+                    ii = json.loads(ii)
+                    sport_data["bigData"] = ii
+                    # import ipdb; ipdb.set_trace()
+                elif "smallData =" in ii:
+                    ii = ii.replace("smallData =", '').replace(";", '').replace("'", '"').replace('y', '"y"').replace('val', '"val"')
+                    ii = json.loads(ii)
+                    sport_data["smallData"] = ii
+                    # import ipdb; ipdb.set_trace()
+    for i, v in enumerate(sport_data.get("days")):
+        ret[v] = f'{sport_data["smallData"][i]["val"]}({sport_data["smallData"][i]["y"]}) - {sport_data["bigData"][i]["val"]}({sport_data["bigData"][i]["y"]})'
+    return ret
 
 def main():
-    # base_data = crawl_base_data(city_code=57520)
-    # print(base_data)
-    crawl_sport_data(city_code=57520, sport_code=1)
-
+    base_data = crawl_base_data(city_code=57520)
+    print(base_data)
+    sport_data = crawl_sport_data(city_code=57520, sport_code=1)
+    print(sport_data)
 
 if __name__ == "__main__":
     main()
