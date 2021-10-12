@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"reflect"
+)
 
 type A struct {
 	A string
@@ -28,4 +31,21 @@ func main() {
 
 	a.change2("1", 2)
 	fmt.Println(a)
+
+	t := reflect.TypeOf(a)
+	v := reflect.ValueOf(a)
+
+	fmt.Printf("a Is %+v \n\n", a)
+	for i := 0; i < t.NumField(); i++ {
+		fmt.Println("t: ", t, "  ---  ", "v: ", v)
+		fmt.Println("gogogo\n", t.Field(i), v.Field(i))
+		name := t.Field(i).Name
+		value := v.Field(i).Interface()
+		fmt.Println("show", name, value)
+		svalue, ok := value.(int)
+		if ok {
+			fmt.Println("good vlaue is int: ", svalue)
+		}
+
+	}
 }
