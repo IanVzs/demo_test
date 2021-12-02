@@ -114,3 +114,6 @@ path_args
 
 # MacOS
 .DS_Store
+
+# jupyter-notebook
+ipynb_checkpoints
