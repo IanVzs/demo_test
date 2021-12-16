@@ -32,8 +32,8 @@ def get_requests_resp(tkey_url, tkey):
     return (tkey_url, tkey)
 
 tkey_url_list = [
-        ("https://wx.zuoshouyisheng.com/wx_api/get_qrcode?app_id=wx7ae5c0d83b1240a8&scene_str=wys_1", 1),
-        ("https://wx.zuoshouyisheng.com/wx_api/get_qrcode?app_id=wx7ae5c0d83b1240a8&scene_str=wys_2", 2),
+        ("https://wx.helloworld.com.cn/wx_api/get_qrcode?app_id=wx7ae5da5b1240a8&scene_str=wys_1", 1),
+        ("https://wx.helloworld.com.cn/wx_api/get_qrcode?app_id=wx7ae5da5b1240a8&scene_str=wys_2", 2),
         ]
 
 task_list = []

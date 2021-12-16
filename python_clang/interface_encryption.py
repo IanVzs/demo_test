@@ -22,7 +22,7 @@ def get_key(data):
         h.update(cookie)
         return h.hexdigest().encode('utf-8')
 
-    url = "https://wx.zuoshouyisheng.com/wx_api/get_key"
+    url = "https://wx.helloworld.com.cn/wx_api/get_key"
     app_id = data.get("app_id")
     date_keys_set = set(data.keys())
     need_keys_set = set(["datetime", "app_id", "zykf_app_id", "data"])
