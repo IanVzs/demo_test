@@ -1,0 +1,3 @@
+[submodule "opencv_some/yolo5v_test/yolov5"]
+	path = opencv_some/yolo5v_test/yolov5
+	url = git@github.com:ultralytics/yolov5.git

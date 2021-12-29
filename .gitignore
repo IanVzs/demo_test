@@ -108,3 +108,13 @@ path_args
 
 # .vscode
 .vscode
+
+# images
+*.png
+
+# MacOS
+.DS_Store
+
+# jupyter-notebook
+ipynb_checkpoints
+.ipynb_checkpoints/

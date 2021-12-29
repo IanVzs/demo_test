@@ -1,4 +1,4 @@
-#from flask_cors import CORS
+# from flask_cors import CORS
 import requests
 from werkzeug.routing import BaseConverter
 from flask import Flask, jsonify, abort, request, make_response, Blueprint
@@ -9,7 +9,7 @@ app.use_debugger = False
 app.use_reloader = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
 app.url_map.strict_slashes = False
-#CORS(app)
+# CORS(app)
 
 class RegexConverter(BaseConverter):
     def __init__(self, url_map, *items):
@@ -31,6 +31,13 @@ def main():
 
 @app.route("/hello")
 def hello():
+    import requests
+    requests.get("http://127.0.0.1:8979/")
+    return make_response(jsonify({'hello': 'hello_flask'}))
+
+@app.route("/dev-api/corpus/", methods=['GET', 'POST'])
+def hi():
+    import pdb; pdb.set_trace()
     import requests
     requests.get("http://127.0.0.1:8979/")
     return make_response(jsonify({'hello': 'hello_flask'}))
