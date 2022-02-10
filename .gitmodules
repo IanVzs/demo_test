@@ -1,3 +1,6 @@
 [submodule "opencv_some/yolo5v_test/yolov5"]
 	path = opencv_some/yolo5v_test/yolov5
 	url = git@github.com:ultralytics/yolov5.git
+[submodule "opencv_some/yolo5v_test/labelImg"]
+	path = opencv_some/yolo5v_test/labelImg
+	url = git@github.com:tzutalin/labelImg.git
