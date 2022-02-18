@@ -128,3 +128,8 @@ python train.py --img 640 --batch 8 --epochs 500 --data data/bigcard.yaml --cfg 
 python detect.py --source ../datasets/card/images/train2017/a1.jpeg --weights ./runs/train/exp13/weights/best.pt
 ```
 
+## 部署
+- 入口: `yolorun.py`
+- 依赖: `utils_datasets.py` 需要放置到`utils/datasets.py`处
+- `models`, `utils`
+- `data/images`, `ui.yaml`这两个只是自己偷懒没有深度修改代码,所以在某些错误情况下会需要加载这些文件,虽然加载了依然不会正确...
