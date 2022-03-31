@@ -39,8 +39,8 @@ def create_shortcut():
 def creat_win():
     import pythoncom
     from win32com.shell import shell
-    from win32com.shell import shellcon
-
+    # from win32com.shell import shellcon
+    pythoncom.CoInitialize()
     try:
         if os.environ.get("HOME"):
             path_desktop = os.path.join(os.environ.get("HOME"), "Desktop")
