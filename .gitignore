@@ -111,6 +111,8 @@ path_args
 
 # images
 *.png
+*.jpg
+*.jpeg
 
 # MacOS
 .DS_Store
