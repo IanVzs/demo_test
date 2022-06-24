@@ -65,6 +65,7 @@ data/
 *.dylib
 # Other files and folders
 .settings/
+build/
 
 # Executables
 *.exe
