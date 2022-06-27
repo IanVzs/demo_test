@@ -6,3 +6,5 @@ find_package( OpenCV REQUIRED )
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 add_executable( MatchTemplate.out MatchTemplate.cpp )
 target_link_libraries( MatchTemplate.out ${OpenCV_LIBS} )
+# 指定编译选项
+#set(CMAKE_CXX_FLAGS_DEBUG "-g -Wall")
