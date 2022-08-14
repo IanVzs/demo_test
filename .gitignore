@@ -65,6 +65,7 @@ data/
 *.dylib
 # Other files and folders
 .settings/
+build/
 
 # Executables
 *.exe
@@ -111,6 +112,8 @@ path_args
 
 # images
 *.png
+*.jpg
+*.jpeg
 
 # MacOS
 .DS_Store
@@ -118,3 +121,7 @@ path_args
 # jupyter-notebook
 ipynb_checkpoints
 .ipynb_checkpoints/
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+hicv
