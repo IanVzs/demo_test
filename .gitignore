@@ -121,7 +121,10 @@ path_args
 # jupyter-notebook
 ipynb_checkpoints
 .ipynb_checkpoints/
+
+# cmake file
 CMakeCache.txt
 CMakeFiles/
 cmake_install.cmake
 hicv
+Makefile
