@@ -128,3 +128,5 @@ CMakeFiles/
 cmake_install.cmake
 hicv
 Makefile
+CMakeLists.txt.user
+build-*-Debug/
